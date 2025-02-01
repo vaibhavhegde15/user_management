@@ -69,11 +69,16 @@ router.get('/:id', userController.getUserById);
  *             properties:
  *               name:
  *                 type: string
+ *                 example: admin
  *               email:
  *                 type: string
+ *                 example: admin@example.com
  *               role:
  *                 type: string
  *                 enum: [admin, user]
+ *               password:
+ *                 type: string
+ *                 example: admin
  *     responses:
  *       201:
  *         description: User created successfully
@@ -87,6 +92,9 @@ router.post('/', authorizeRoles(['admin']), validateUserCreation, hashPassword, 
  * /users/{id}:
  *   put:
  *     summary: Update an existing user (Admin only)
+ *     description: |
+ *       You can update any of the user attributes (name, email, role, or password). 
+ *       If you wish to only update a specific field, only provide the field you want to update in the request body.
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -106,11 +114,16 @@ router.post('/', authorizeRoles(['admin']), validateUserCreation, hashPassword, 
  *             properties:
  *               name:
  *                 type: string
+ *                 example: admin
  *               email:
  *                 type: string
+ *                 example: admin@example.com
  *               role:
  *                 type: string
  *                 enum: [admin, user]
+ *               password:
+ *                 type: string
+ *                 example: admin
  *     responses:
  *       200:
  *         description: User updated successfully

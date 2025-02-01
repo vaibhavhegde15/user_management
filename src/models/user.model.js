@@ -27,15 +27,15 @@ async function getUserById(id) {
 async function updateUser(id, userData) {
   let queryString = '', queryData = [];
   for(key in userData){
-    queryString += ` SET ${key} = ?,`;
+    queryString += ` ${key} = ?,`;
     queryData.push(userData[key]);
   }
   if(Object.keys(userData).includes('password')){
-    const currentTimeStamp = new Date();
-    queryString += ` SET passwordTimeStamp = ${currentTimeStamp.toISOString()},`;
+    queryString += ` passwordTimeStamp = ?,`;
+    queryData.push(new Date());
   }
   queryString = queryString.slice(0, -1);
-  const query = `UPDATE users${queryString} WHERE id = ?`;
+  const query = `UPDATE users SET${queryString} WHERE id = ?`;
   const [result] = await pool.execute(query, [...queryData, id]);
   return result.affectedRows;
 }
