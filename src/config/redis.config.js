@@ -1,4 +1,3 @@
-// src/config/redis.config.js
 const redis = require('redis');
 const { redis: redisConfig } = require('./env.config');
 

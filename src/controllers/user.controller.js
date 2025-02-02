@@ -4,8 +4,8 @@ const { NotFoundError, BadRequestError } = require('../utils/customErrors');
 async function createUser(req, res, next) {
   try {
     const userData = req.body;
-    const userId = await userService.createUser(userData);
-    res.status(201).json({ message: 'User created', userId });
+    const id = await userService.createUser(userData);
+    res.status(201).json({ message: 'User created', id });
   } catch (error) {
     next(error);
   }
